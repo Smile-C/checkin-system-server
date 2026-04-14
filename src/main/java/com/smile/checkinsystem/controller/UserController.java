@@ -29,4 +29,15 @@ public class UserController {
 
         return ApiResponse.success("登录成功", result);
     }
+
+    @PostMapping("/register")
+    public ApiResponse<Map<String, Object>> register(@RequestBody Map<String, String> params) {
+
+        String username = params.get("username");
+        String password = params.get("password");
+
+        Map<String, Object> result = userService.register(username, password);
+
+        return ApiResponse.success("注册成功", result);
+    }
 }
