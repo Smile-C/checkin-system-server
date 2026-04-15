@@ -9,5 +9,7 @@ public interface UserMapper {
 
     User findByUsername(@Param("username") String username);
 
+    User findById(@Param("id") Long id);
+
     int insertUser(User user);
 }

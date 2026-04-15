@@ -8,6 +8,10 @@
         SELECT * FROM user WHERE username = #{username}
     </select>
 
+    <select id="findById" resultType="User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user (username, password)
         VALUES (#{username}, #{password})

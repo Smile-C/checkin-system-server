@@ -5,7 +5,6 @@ import com.smile.checkinsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -22,12 +21,15 @@ public class UserController {
         String username = params.get("username");
         String password = params.get("password");
 
-        String token = userService.login(username, password);
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("token", token);
+        Map<String, Object> result = userService.login(username, password);
 
         return ApiResponse.success("登录成功", result);
+    }
+
+    @GetMapping("/me")
+    public ApiResponse<Map<String, Object>> me(@RequestHeader("Authorization") String authorization) {
+        Map<String, Object> result = userService.getCurrentUser(authorization);
+        return ApiResponse.success("获取当前用户成功", result);
     }
 
     @PostMapping("/register")
